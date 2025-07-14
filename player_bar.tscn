@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bxu2ganp2ytg2"]
+
+[ext_resource type="Script" uid="uid://uduq61dt2xlf" path="res://player_bar.gd" id="1_y0dbh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y0dbh"]
+size = Vector2(100, 15)
+
+[node name="PlayerBar" type="CharacterBody2D"]
+collision_mask = 4
+script = ExtResource("1_y0dbh")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 100.0
+offset_bottom = 15.0
+color = Color(0.701041, 0.3098, 0.93525, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(50, 7.5)
+shape = SubResource("RectangleShape2D_y0dbh")

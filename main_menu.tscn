@@ -1,0 +1,44 @@
+[gd_scene load_steps=2 format=3 uid="uid://dd1iu5vnyhsmf"]
+
+[sub_resource type="Theme" id="Theme_rhts7"]
+
+[node name="MainMenu" type="CanvasLayer"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(150, 0)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -20.0
+offset_right = 48.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="StartGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_rhts7")
+text = "Start Game"
+
+[node name="ResumeGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Resume Game"
+
+[node name="ResetGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Reset Game"
+
+[node name="ExitGameButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Exit Game"
