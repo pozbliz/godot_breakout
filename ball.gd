@@ -28,9 +28,11 @@ func _physics_process(delta):
 		var normal = collision.get_normal()
 		direction = direction.bounce(normal).normalized()
 		
-		if collision.collider and collision.collider.name == "Block":
+		if collision.get_collider() and collision.get_collider().name == "Block":
 			speed = min(speed * increase_factor, MAX_SPEED)
-			enemy_hit.emit()
+			collision.enemy_hit.emit()
+			if collision.has_method("kill_block"):
+				collision.kill_block()
 	
 func _draw():
 	draw_circle(Vector2.ZERO, BALL_RADIUS, BALL_COLOR)

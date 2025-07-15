@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://i1xqlobw8ubl"]
+[gd_scene load_steps=9 format=3 uid="uid://i1xqlobw8ubl"]
 
 [ext_resource type="Script" uid="uid://biap6o23nd8g5" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bxu2ganp2ytg2" path="res://player_bar.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://bvllbntyy3xts" path="res://enemy_block.tscn" id="3_5vw27"]
 [ext_resource type="PackedScene" uid="uid://ctskm6iqjh442" path="res://ball.tscn" id="4_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dt6j0o23v1htt" path="res://walls.tscn" id="5_lquwl"]
 [ext_resource type="PackedScene" uid="uid://x1e0kvu12ngm" path="res://player_goal.tscn" id="6_5vw27"]
@@ -11,6 +12,7 @@
 [node name="Main" type="Node"]
 script = ExtResource("1_0xm2m")
 ball_scene = ExtResource("4_1bvp3")
+block_scene = ExtResource("3_5vw27")
 
 [node name="GameBackground" type="ColorRect" parent="."]
 anchors_preset = 15

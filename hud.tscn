@@ -2,36 +2,51 @@
 
 [ext_resource type="Script" uid="uid://d1xrykpdw0d8" path="res://hud.gd" id="1_37p78"]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("score_label", "lives_label")]
 script = ExtResource("1_37p78")
+score_label = NodePath("HBoxContainer/ScoreValue")
+lives_label = NodePath("HBoxContainer/LivesValue")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = 8
+anchors_preset = 5
 anchor_left = 0.5
-anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -34.0
-offset_top = -20.0
-offset_right = 34.0
-offset_bottom = 20.0
+offset_left = -63.0
+offset_right = 63.0
+offset_bottom = 67.0
 grow_horizontal = 2
-grow_vertical = 2
 size_flags_horizontal = 4
 alignment = 1
 
-[node name="PlayerScore" type="Label" parent="HBoxContainer"]
+[node name="ScoreText" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "Score: "
+
+[node name="ScoreValue" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "0"
 horizontal_alignment = 1
 
-[node name="SeparatorLabel" type="Label" parent="HBoxContainer"]
+[node name="SeparatorText" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
 text = "  -  "
 
-[node name="EnemyScore" type="Label" parent="HBoxContainer"]
+[node name="LivesText" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 48
-text = "0"
+text = "Lives: "
+
+[node name="LivesValue" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "3"
+
+[node name="Message" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="MessageTimer" type="Timer" parent="."]
+wait_time = 2.0
