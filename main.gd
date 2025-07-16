@@ -56,6 +56,8 @@ func new_game():
 	$HUD.show()
 	get_tree().paused = false
 	$HUD/HBoxContainer/ScoreValue.text = str(0)
+	player_life = 3
+	$HUD.update_lives(player_life)
 	new_round()
 	spawn_blocks()
 
@@ -70,9 +72,17 @@ func _on_player_goal_body_entered(body: Node):
 	player_life -= 1
 	$HUD.update_lives(player_life)
 	if player_life <= 0:
-		$HUD.show_game_over()
+		await $HUD.show_game_over()
+		get_tree().paused = true
+		delete_all_blocks()
+		$MainMenu.show()
+		$HUD.hide()
 	else:
 		new_round()
+		
+func delete_all_blocks():
+	for block in get_tree().get_nodes_in_group("blocks"):
+		block.queue_free()
 		
 func _on_block_enemy_hit():
 	if scoring:

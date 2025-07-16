@@ -19,7 +19,7 @@ func _ready() -> void:
 func _physics_process(delta):
 	if not game_started:
 		return
-
+		
 	var velocity = direction.normalized() * speed
 	var collision = move_and_collide(velocity * delta)
 	var increase_factor: float = 1 + SPEED_INCREASE / 100
@@ -28,11 +28,13 @@ func _physics_process(delta):
 		var normal = collision.get_normal()
 		direction = direction.bounce(normal).normalized()
 		
-		if collision.get_collider() and collision.get_collider().name == "Block":
+		var collider = collision.get_collider()
+		
+		if collider and collider.is_in_group("blocks"):
 			speed = min(speed * increase_factor, MAX_SPEED)
-			collision.enemy_hit.emit()
-			if collision.has_method("kill_block"):
-				collision.kill_block()
+			enemy_hit.emit()
+			if collider.has_method("kill_block"):
+				collider.kill_block()
 	
 func _draw():
 	draw_circle(Vector2.ZERO, BALL_RADIUS, BALL_COLOR)
@@ -40,8 +42,8 @@ func _draw():
 func start(pos):
 	position = pos
 	speed = 250
+	direction = Vector2.ZERO
+	await get_tree().create_timer(1).timeout
 	game_started = true
 	direction.y = 1
 	direction.x = randf_range(-0.7, 0.7)
-	
-	await get_tree().create_timer(1).timeout
