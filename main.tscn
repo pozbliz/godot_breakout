@@ -26,8 +26,6 @@ color = Color(0.0959682, 0.235463, 0.342687, 1)
 
 [node name="Walls" parent="." instance=ExtResource("5_lquwl")]
 
-[node name="Ball" parent="." instance=ExtResource("4_1bvp3")]
-
 [node name="PlayerGoal" parent="." instance=ExtResource("6_5vw27")]
 position = Vector2(240, 635)
 

@@ -9,7 +9,6 @@ var scoring = false
 
 func _ready() -> void:
 	$PlayerGoal.body_entered.connect(_on_player_goal_body_entered)
-	$Ball.enemy_hit.connect(_on_block_enemy_hit)
 	$MainMenu/VBoxContainer/StartGameButton.pressed.connect(_on_start_game_button_pressed)
 	$MainMenu/VBoxContainer/ExitGameButton.pressed.connect(_on_exit_game_button_pressed)
 	$MainMenu/VBoxContainer/ResetGameButton.pressed.connect(_on_reset_game_button_pressed)
@@ -55,9 +54,14 @@ func new_game():
 	$MainMenu.hide()
 	$HUD.show()
 	get_tree().paused = false
-	$HUD/HBoxContainer/ScoreValue.text = str(0)
+	player_score = 0
 	player_life = 3
+	$HUD.update_player_score(player_score)
 	$HUD.update_lives(player_life)
+	var ball = ball_scene.instantiate()
+	add_child(ball)
+	ball.add_to_group("ball")
+	$Ball.enemy_hit.connect(_on_block_enemy_hit)
 	new_round()
 	spawn_blocks()
 
@@ -83,6 +87,8 @@ func _on_player_goal_body_entered(body: Node):
 func delete_all_blocks():
 	for block in get_tree().get_nodes_in_group("blocks"):
 		block.queue_free()
+	for ball in get_tree().get_nodes_in_group("ball"):
+		ball.queue_free()
 		
 func _on_block_enemy_hit():
 	if scoring:

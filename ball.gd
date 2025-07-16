@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 @onready var direction: Vector2 = Vector2.ZERO
-@onready var speed := 250.0
+var speed := 250.0
 var game_started := false
 
 const SPEED_INCREASE := 5.0  # in %
@@ -15,6 +15,7 @@ signal enemy_hit
 
 func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_PAUSABLE
+	speed = 250.0
 
 func _physics_process(delta):
 	if not game_started:
@@ -31,19 +32,19 @@ func _physics_process(delta):
 		var collider = collision.get_collider()
 		
 		if collider and collider.is_in_group("blocks"):
-			speed = min(speed * increase_factor, MAX_SPEED)
 			enemy_hit.emit()
 			if collider.has_method("kill_block"):
 				collider.kill_block()
+				speed = min(speed * increase_factor, MAX_SPEED)
 	
 func _draw():
 	draw_circle(Vector2.ZERO, BALL_RADIUS, BALL_COLOR)
 
 func start(pos):
 	position = pos
-	speed = 250
 	direction = Vector2.ZERO
 	await get_tree().create_timer(1).timeout
 	game_started = true
 	direction.y = 1
 	direction.x = randf_range(-0.7, 0.7)
+	print("speed: ", speed)
